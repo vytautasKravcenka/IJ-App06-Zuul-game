@@ -25,6 +25,8 @@ public class Room
 
     private ArrayList<Item> items = new ArrayList();
 
+    private Player player = new Player();
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -54,10 +56,27 @@ public class Room
         items.add(item);
     }
 
-    public void takeItemFromRoom(Item item)
+    public void takeItemFromRoom(String name)
     {
-        //add ifs for unable to reach without some items
-        items.remove(item);
+        Item item = findItem(name);
+        if(item == null) {
+            System.out.println("There is no item with '" + name + "' name in this room");
+        }
+        else
+        {
+            player.addItemToInventory(item);
+            items.remove(item);
+            System.out.println(name + " is now in your inventory./n");
+        }
+    }
+
+    private Item findItem(String name)
+    {
+        for(Item item : items)
+        {
+            if(item.getName() == name) return item;
+        }
+        return null;
     }
 
     /**

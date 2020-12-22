@@ -114,9 +114,11 @@ public class Game
     }
 
     private void useItem() {
+
     }
 
     private void takeItem() {
+
     }
 
     private void lookAround() {

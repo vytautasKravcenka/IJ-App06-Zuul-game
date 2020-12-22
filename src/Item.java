@@ -5,14 +5,14 @@ public class Item {
     private final String name;
     private final String usingDescription;
     private final String unableUseDescription;
-    private Boolean fewActionsNeeded;
+    private Boolean takeByHand;
 
     public Item (String name, String trueDescription, String falseDescription, Boolean takeByHand)
     {
         this.name = name;
         usingDescription = trueDescription;
         unableUseDescription = falseDescription;
-        fewActionsNeeded = takeByHand;
+        this.takeByHand = takeByHand;
     }
 
     public String getName() {
@@ -25,5 +25,9 @@ public class Item {
 
     public String getUsingDescription() {
         return usingDescription;
+    }
+
+    public Boolean getTakeByHand() {
+        return takeByHand;
     }
 }
