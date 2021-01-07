@@ -70,11 +70,11 @@ public class Room
         }
     }
 
-    private Item findItem(String name)
+    public Item findItem(String name)
     {
         for(Item item : items)
         {
-            if(item.getName() == name) return item;
+            if(item.getName().equals(name)) return item;
         }
         return null;
     }
@@ -125,6 +125,15 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+
+    public String getItemsList() {
+        String itemsList = "Items in this room: ";
+        for(Item item : items)
+        {
+            itemsList += item.getName() + " ";
+        }
+        return itemsList;
     }
 }
 

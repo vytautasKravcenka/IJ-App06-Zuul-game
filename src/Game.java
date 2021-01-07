@@ -22,6 +22,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private MapGenerator mapGenerator;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -32,6 +33,7 @@ public class Game
         //createRooms();
         mapGenerator = new MapGenerator();
         currentRoom = mapGenerator.getStartRoom();
+        player = new Player();
         play();
     }
 
@@ -95,7 +97,7 @@ public class Game
                 break;
                 
             case TAKE:
-                takeItem();
+                takeItem(command);
                 break;
 
             case USE:
@@ -117,12 +119,33 @@ public class Game
 
     }
 
-    private void takeItem() {
+    private void takeItem(Command command) {
+        if(!command.hasSecondWord())
+        {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Take what?");
+            return;
+        }
+
+        String itemName = command.getSecondWord();
+
+        Item item = currentRoom.findItem(itemName);
+
+        if (item == null) {
+            System.out.println("There is no item like that in the room!");
+        }
+        else if(!item.getTakeByHand()) {
+            System.out.println(item.getCantTakeDescription());
+        }
+        else {
+            currentRoom.takeItemFromRoom(itemName);
+        }
 
     }
 
     private void lookAround() {
         System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getItemsList());
     }
 
     // implementations of user commands:
