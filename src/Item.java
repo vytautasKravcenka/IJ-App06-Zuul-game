@@ -4,13 +4,17 @@
 public class Item {
     private final String name;
     private String usableName;
+
     private String usingDescription;
     private String unableUseDescription;
+
     private String cantTakeDescription;
+
     private String canBeUsedOn;
-    private Boolean takeByHand;
-    private Boolean isUsable;
-    private Boolean ignoreInRoom;
+
+    private boolean takeByHand;
+    private boolean isUsable;
+    private boolean ignoreInRoom;
 
     public Item (String name)
     {
@@ -46,7 +50,7 @@ public class Item {
         return name;
     }
 
-    public Boolean getTakeByHand() {
+    public boolean getTakeByHand() {
         return takeByHand;
     }
 
@@ -54,7 +58,7 @@ public class Item {
         this.takeByHand = takeByHand;
     }
 
-    public Boolean getUsable() {
+    public boolean getUsable() {
         return isUsable;
     }
 
@@ -70,7 +74,7 @@ public class Item {
         this.canBeUsedOn = canBeUsedOn;
     }
 
-    public Boolean getIgnoreInRoom() {
+    public boolean getIgnoreInRoom() {
         return ignoreInRoom;
     }
 

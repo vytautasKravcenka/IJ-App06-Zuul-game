@@ -23,11 +23,10 @@ public class Room
     private String doorErrorMessage; //Message shown when door cannot be unlocked
     // String is the key to a room in that direction
     // east would be an exit that goes to the Room
-    private HashMap<String, Room> exits;
+    private final HashMap<String, Room> exits = new HashMap<>();;
+
 
     private ArrayList<Item> items = new ArrayList();
-
-    private Player player = new Player();
 
     /**
      * Create a room described "description". Initially, it has
@@ -39,7 +38,6 @@ public class Room
     {
         this.description = description;
         this.locked = locked;
-        exits = new HashMap<>();
     }
 
 
@@ -48,7 +46,7 @@ public class Room
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
-    public void setExit(String direction, Room neighbor) 
+    public void setExit(String direction, Room neighbor)
     {
         exits.put(direction, neighbor);
     }
@@ -59,18 +57,9 @@ public class Room
         items.add(item);
     }
 
-    public void takeItemFromRoom(String name)
+    public void takeItemFromRoom(Item item)
     {
-        Item item = findItem(name);
-        if(item == null) {
-            System.out.println("There is no item with '" + name + "' name in this room");
-        }
-        else
-        {
-            player.addItemToInventory(item);
             items.remove(item);
-            System.out.println(name + " is now in your inventory./n");
-        }
     }
 
     public Item findItem(String name)
@@ -111,8 +100,8 @@ public class Room
     {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
-        
-        for(String exit : keys) 
+
+        for(String exit : keys)
         {
             returnString += " " + exit;
         }
@@ -125,7 +114,7 @@ public class Room
      * @param direction The exit's direction.
      * @return The room in the given direction.
      */
-    public Room getExit(String direction) 
+    public Room getExit(String direction)
     {
         return exits.get(direction);
     }
@@ -156,10 +145,6 @@ public class Room
 
     public void setDoorErrorMessage(String doorErrorMessage) {
         this.doorErrorMessage = doorErrorMessage;
-    }
-
-    public void useItem(Item item) {
-
     }
 }
 

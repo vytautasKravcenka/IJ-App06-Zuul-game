@@ -72,7 +72,7 @@ public class ItemsGenerator {
         item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
-        item.setCanBeUsedOn("plant");
+        item.setCanBeUsedOn("leaf");
         return item;
     }
 }
