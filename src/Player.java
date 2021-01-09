@@ -4,7 +4,15 @@ import java.util.ArrayList;
  *
  */
 public class Player {
-    private ArrayList<Item> inventory = new ArrayList<>();
+    private static final ArrayList<Item> inventory = new ArrayList<>();
+
+    public static Item findItem(String itemName) {
+        for(Item item : inventory)
+        {
+            if(item.getName().equals(itemName)) return item;
+        }
+        return null;
+    }
 
     public void addItemToInventory(Item item) {
         inventory.add(item);

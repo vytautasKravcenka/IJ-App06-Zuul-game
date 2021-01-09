@@ -101,7 +101,7 @@ public class Game
                 break;
 
             case USE:
-                useItem();
+                useItem(command);
                 break;
                 
             case GO:
@@ -115,8 +115,28 @@ public class Game
         return wantToQuit;
     }
 
-    private void useItem() {
+    private void useItem(Command command) {
 
+        if(!command.hasSecondWord())
+        {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Use what?");
+            return;
+        }
+
+        String itemName = command.getSecondWord();
+
+        Item item = Player.findItem(itemName);
+
+        if (item == null) {
+            System.out.println("There is no item like that in the room!");
+        }
+        else if(!item.getUsable()) {
+            System.out.println(item.getUnableUseDescription());
+        }
+        else {
+            currentRoom.useItem(item);
+        }
     }
 
     private void takeItem(Command command) {
@@ -185,9 +205,13 @@ public class Game
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
+        else if(nextRoom.getLocked())
+        {
+            System.out.println(nextRoom.getDoorErrorMessage());
+        }
         else {
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getShortDescription());
         }
     }
 

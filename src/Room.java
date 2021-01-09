@@ -18,7 +18,9 @@ import java.util.HashMap;
 
 public class Room 
 {
+    private boolean locked;
     private String description;
+    private String doorErrorMessage; //Message shown when door cannot be unlocked
     // String is the key to a room in that direction
     // east would be an exit that goes to the Room
     private HashMap<String, Room> exits;
@@ -33,9 +35,10 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description)
+    public Room(String description, boolean locked)
     {
         this.description = description;
+        this.locked = locked;
         exits = new HashMap<>();
     }
 
@@ -128,12 +131,35 @@ public class Room
     }
 
     public String getItemsList() {
-        String itemsList = "Items in this room: ";
+        StringBuilder itemsList = new StringBuilder("Items in this room: ");
         for(Item item : items)
         {
-            itemsList += item.getName() + " ";
+            if(!item.getIgnoreInRoom()) // TODO: check if this is okay to write !boolean method instead of "== false"
+            itemsList.append(item.getName()).append(" ");
+            else
+            {
+                itemsList.append(item.getUsableName()).append(" ");
+            }
         }
-        return itemsList;
+
+        return itemsList.toString();
+    }
+
+    public boolean getLocked()
+    {
+        return locked;
+    }
+
+    public String getDoorErrorMessage() {
+        return doorErrorMessage;
+    }
+
+    public void setDoorErrorMessage(String doorErrorMessage) {
+        this.doorErrorMessage = doorErrorMessage;
+    }
+
+    public void useItem(Item item) {
+
     }
 }
 
