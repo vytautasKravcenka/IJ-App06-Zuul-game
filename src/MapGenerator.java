@@ -110,6 +110,6 @@ public class MapGenerator {
         garden.setExit("south", livingRoom);
         garden.setExit("west", basement);
 
-        basement.setExit("East", garden);
+        basement.setExit("east", garden);
     }
 }
