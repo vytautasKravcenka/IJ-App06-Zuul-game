@@ -25,59 +25,63 @@ public class MapGenerator {
     }
 
     private void createBedroom() {
-        bedroom = new Room("In your bedroom", false); // TODO: change description
+        bedroom = new Room("bedroom" ,""); // TODO: change description
 
 
         bedroom.addItemInRoom(itemsGenerator.createGloves());
     }
 
     private void createHallway() {
-        hallway = new Room("in the computing admin office", false); // TODO: change description
+        hallway = new Room("hallway",""); // TODO: change description
 
 
         hallway.addItemInRoom(itemsGenerator.createBroom());
     }
 
     private void createLab() {
-        lab = new Room("in a computing lab", false); // TODO: change description
+        lab = new Room("lab",""); // TODO: change description
 
 
         lab.addItemInRoom(itemsGenerator.createAcid());
     }
 
     private void createLivingRoom() {
-        livingRoom = new Room("in the computing admin office", false); // TODO: change description
+        livingRoom = new Room("living room",""); // TODO: change description
 
 
         livingRoom.addItemInRoom(itemsGenerator.createCup());
     }
 
     private void createKitchen() {
-        kitchen = new Room("in a lecture theater", true); // TODO: change description
+        kitchen = new Room("kitchen",""); // TODO: change description
 
+        kitchen.setLocked(true);
         kitchen.setDoorErrorMessage(""); // TODO: add text
 
         kitchen.addItemInRoom(itemsGenerator.createCrowbar());
     }
 
     private void createOutside() {
-        outside = new Room("outside the main entrance of the university", true); // TODO: change description
+        outside = new Room("outside",""); // TODO: change description
 
+        outside.setLocked(true);
         outside.setDoorErrorMessage(""); // TODO: add text
 
         outside.setExit("east", livingRoom);
     }
 
     private void createGarden() {
-        garden = new Room("in a computing lab", false); // TODO: change description
+        garden = new Room("garden",""); // TODO: change description
 
 
         garden.addItemInRoom(itemsGenerator.createLeaf());
+        garden.addItemInRoom(itemsGenerator.createH2OCup());
     }
 
     private void createBasement() {
-        basement = new Room("in the campus pub", true); // TODO: change description
+        basement = new Room("basement",""); // TODO: change description
 
+        basement.setLocked(true);
         basement.setDoorErrorMessage(""); // TODO: add text
 
         basement.addItemInRoom(itemsGenerator.createKey());

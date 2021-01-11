@@ -6,7 +6,7 @@ public class ItemsGenerator {
         item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
-        item.setCanBeUsedOn(""); // TODO: [ IMPORTANT ] add what the item can be used on (name lab thingy)
+        item.setCanBeUsedOn("mixer");
         return item;
     }
 
@@ -43,7 +43,7 @@ public class ItemsGenerator {
         item.setCantTakeDescription(""); // TODO: add "cantTakeDescription"
         item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
-        item.setCanBeUsedOn(""); // TODO: [ IMPORTANT ] add what the item can be used on (name lab thingy)
+        item.setCanBeUsedOn("mixer");
         item.setTakeByHand(false);
         return item;
     }

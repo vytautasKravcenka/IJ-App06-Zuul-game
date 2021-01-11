@@ -23,6 +23,8 @@ public class Game {
     private MapGenerator mapGenerator;
     private Player player;
 
+    public boolean wantToQuit = false;
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -63,7 +65,7 @@ public class Game {
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getShortDescription());
     }
 
     /**
@@ -73,7 +75,6 @@ public class Game {
      * @return true If the command ends the game, false otherwise.
      */
     private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
 
@@ -95,7 +96,7 @@ public class Game {
                 break;
 
             case USE:
-                useItem(command);
+                confirmItemUse(command);
                 break;
 
             case GO:
@@ -117,7 +118,7 @@ public class Game {
         System.out.println(player.getItemsList());
     }
 
-    private void useItem(Command command) {
+    private void confirmItemUse(Command command) {
 
         if (!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -163,7 +164,6 @@ public class Game {
 
     private void lookAround() {
         System.out.println(currentRoom.getLongDescription());
-        System.out.println(currentRoom.getItemsList());
     }
 
     // implementations of user commands:
@@ -224,30 +224,68 @@ public class Game {
 
     public void useItem(Item item) {
         Item roomItem = currentRoom.findItem(item.getCanBeUsedOn());
-        if (item.getCanBeUsedOn().equals("sink")) {
-            player.removeItem(item);
-            Item pickable = currentRoom.findItem("H20_cup");
-            currentRoom.takeItemFromRoom(pickable);
-            player.addItemToInventory(pickable);
-        } else if (item.getCanBeUsedOn().equals("mixer")) {
-            player.removeItem(item);
-
-            //text
-            if (currentRoom.findItem("leaf") != null || currentRoom.findItem("H2O_cup") != null) {
-                player.addItemToInventory(currentRoom.findItem("acid"));
-            } else {
-                System.out.println("seems like it needs one more item"); // TODO: change text
-                currentRoom.addItemInRoom(item);
-                item.setIgnoreInRoom(true);
-            }
+        if (item.getName().equals("cup") && currentRoom.getName().equals("garden")) {
+            useSink(item);
+        } else if (item.getCanBeUsedOn().equals("mixer") && currentRoom.getName().equals("lab")) {
+            useMixer(item);
+        } else if (item.getName().equals("crowbar") && currentRoom.getName().equals("garden")) {
+            unlockBasementDoor(item);
+        } else if (item.getName().equals("key") && currentRoom.getName().equals("living room")) {
+            unlockMainDoor(item);
+        } else if (item.getName().equals("acid") && currentRoom.getName().equals("living room")) {
+            unlockKitchenDoor(item);
         } else if (roomItem == null) {
             System.out.println(item.getUnableUseDescription());
         } else {
             player.removeItem(item);
+            System.out.println(item.getUsingDescription());
             Item pickable = currentRoom.findItem(item.getCanBeUsedOn());
             currentRoom.takeItemFromRoom(pickable);
             player.addItemToInventory(pickable);
         }
 
+    }
+
+    private void unlockBasementDoor(Item item) {
+        player.removeItem(item);
+        currentRoom.getExit("west").setLocked(false);
+        System.out.println("You successfully broke the lock! Now you can access the Basement");
+    }
+
+    private void unlockMainDoor(Item item) {
+        player.removeItem(item);
+        System.out.println("Congratulations you have beaten the game!");
+        wantToQuit = true;
+    }
+
+    private void unlockKitchenDoor(Item item) {
+        player.removeItem(item);
+        currentRoom.getExit("south").setLocked(false);
+        System.out.println("The handle was melted! Now you can access the kitchen");
+    }
+
+    private void useSink(Item item) {
+        player.removeItem(item);
+        System.out.println("You put the cup in the old sink");
+        Item pickable = currentRoom.findItem("H20_cup");
+        currentRoom.takeItemFromRoom(pickable);
+        System.out.println("Cup was filled with water and put back in your inventory!");
+        player.addItemToInventory(pickable);
+    }
+
+    private void useMixer(Item item) {
+        player.removeItem(item);
+
+        System.out.println("Successfully added " + item.getName() + " to the mixer!");
+
+        if (currentRoom.findItem("leaf") != null || currentRoom.findItem("H2O_cup") != null) {
+            System.out.println("beep bloop blab mixer worked fine!");
+            System.out.println("You made Acid and put it into your inventory");
+            player.addItemToInventory(currentRoom.findItem("acid"));
+        } else {
+            System.out.println("seems like we need to add more products in the mixer (needs one more item)");
+            currentRoom.addItemInRoom(item);
+            item.setIgnoreInRoom(true);
+        }
     }
 }

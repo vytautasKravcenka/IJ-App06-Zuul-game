@@ -19,6 +19,7 @@ import java.util.HashMap;
 public class Room 
 {
     private boolean locked;
+    private String name;
     private String description;
     private String doorErrorMessage; //Message shown when door cannot be unlocked
     // String is the key to a room in that direction
@@ -34,10 +35,10 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, boolean locked)
+    public Room(String name, String description)
     {
+        this.name = name;
         this.description = description;
-        this.locked = locked;
     }
 
 
@@ -77,7 +78,7 @@ public class Room
      */
     public String getShortDescription()
     {
-        return description;
+        return "You are in " + name + ".\n";
     }
 
     /**
@@ -88,7 +89,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return description + ".\n" + getExitString() + ".\n" + getItemsList();
     }
 
     /**
@@ -100,7 +101,6 @@ public class Room
     {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
-
         for(String exit : keys)
         {
             returnString += " " + exit;
@@ -120,6 +120,8 @@ public class Room
     }
 
     public String getItemsList() {
+        if(items.size() == 0)
+            return "There seems to be no items in this room.";
         StringBuilder itemsList = new StringBuilder("Items in this room: ");
         for(Item item : items)
         {
@@ -145,6 +147,14 @@ public class Room
 
     public void setDoorErrorMessage(String doorErrorMessage) {
         this.doorErrorMessage = doorErrorMessage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }
 
