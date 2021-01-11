@@ -19,15 +19,15 @@ import java.util.HashMap;
 public class Room 
 {
     private boolean locked;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
     private String doorErrorMessage; //Message shown when door cannot be unlocked
     // String is the key to a room in that direction
     // east would be an exit that goes to the Room
-    private final HashMap<String, Room> exits = new HashMap<>();;
+    private final HashMap<String, Room> exits = new HashMap<>();
 
 
-    private ArrayList<Item> items = new ArrayList();
+    private final ArrayList<Item> items = new ArrayList();
 
     /**
      * Create a room described "description". Initially, it has
@@ -99,13 +99,13 @@ public class Room
      */
     private String getExitString()
     {
-        String returnString = "Exits:";
+        StringBuilder returnString = new StringBuilder("Exits:");
         Set<String> keys = exits.keySet();
         for(String exit : keys)
         {
-            returnString += " " + exit;
+            returnString.append(" ").append(exit);
         }
-        return returnString;
+        return returnString.toString();
     }
 
     /**
@@ -127,10 +127,6 @@ public class Room
         {
             if(!item.getIgnoreInRoom()) // TODO: check if this is okay to write !boolean method instead of "== false"
             itemsList.append(item.getName()).append(" ");
-            else
-            {
-                itemsList.append(item.getName()).append(" ");
-            }
         }
 
         return itemsList.toString();

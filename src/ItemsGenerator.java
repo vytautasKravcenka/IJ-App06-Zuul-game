@@ -3,7 +3,6 @@ public class ItemsGenerator {
 
     public Item createLeaf() {
         item = new Item("leaf");
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
         item.setCanBeUsedOn("mixer");
@@ -12,7 +11,6 @@ public class ItemsGenerator {
 
     public Item createCrowbar() {
         item = new Item("crowbar");
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
         item.setCanBeUsedOn("lock");
@@ -21,7 +19,6 @@ public class ItemsGenerator {
 
     public Item createKey() {
         item = new Item("key");
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
         item.setCanBeUsedOn("door");
@@ -31,7 +28,6 @@ public class ItemsGenerator {
     public Item createCup() {
         item = new Item("cup");
         item.setCantTakeDescription(""); // TODO: add "cantTakeDescription"
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setCanBeUsedOn("sink");
         item.setTakeByHand(false);
@@ -40,8 +36,7 @@ public class ItemsGenerator {
 
     public Item createH2OCup(){
         item = new Item("H2O_cup");
-        item.setCantTakeDescription(""); // TODO: add "cantTakeDescription"
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
+        item.setCantTakeDescription("Don't cheat!"); // TODO: add "cantTakeDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setCanBeUsedOn("mixer");
         item.setTakeByHand(false);
@@ -50,7 +45,6 @@ public class ItemsGenerator {
 
     public Item createBroom() {
         item = new Item("broom");
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
         item.setCanBeUsedOn("cup");
@@ -60,7 +54,6 @@ public class ItemsGenerator {
     public Item createAcid() {
         item = new Item("acid");
         item.setCantTakeDescription(""); // TODO: add "cantTakeDescription"
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setCanBeUsedOn("door_handle");
         item.setTakeByHand(false);
@@ -69,7 +62,6 @@ public class ItemsGenerator {
 
     public Item createGloves() {
         item = new Item("gloves");
-        item.setUnableUseDescription(""); // TODO: add "unableUseDescription"
         item.setUsingDescription(""); // TODO: add "successfulUseDescription"
         item.setTakeByHand(true);
         item.setCanBeUsedOn("leaf");

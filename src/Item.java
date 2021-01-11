@@ -6,7 +6,6 @@ public class Item {
     private String canBeUsedOn;
 
     private String usingDescription;
-    private String unableUseDescription;
 
     private String cantTakeDescription;
 
@@ -25,14 +24,6 @@ public class Item {
 
     public void setUsingDescription(String usingDescription) {
         this.usingDescription = usingDescription;
-    }
-
-    public String getUnableUseDescription() {
-        return unableUseDescription;
-    }
-
-    public void setUnableUseDescription(String unableUseDescription) {
-        this.unableUseDescription = unableUseDescription;
     }
 
     public String getCantTakeDescription() {

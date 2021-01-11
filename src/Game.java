@@ -18,12 +18,13 @@
  */
 
 public class Game {
-    private Parser parser;
+    private final Parser parser;
     private Room currentRoom;
-    private MapGenerator mapGenerator;
-    private Player player;
+    private final Player player;
 
     public boolean wantToQuit = false;
+
+    private int energy = 200;
 
     /**
      * Create the game and initialise its internal map.
@@ -31,7 +32,7 @@ public class Game {
     public Game() {
         parser = new Parser();
         //createRooms();
-        mapGenerator = new MapGenerator();
+        MapGenerator mapGenerator = new MapGenerator();
         currentRoom = mapGenerator.getStartRoom();
         player = new Player();
         play();
@@ -89,22 +90,27 @@ public class Game {
 
             case LOOKAROUND:
                 lookAround();
+                loseEnergy(2);
                 break;
 
             case TAKE:
                 takeItem(command);
+                loseEnergy(4);
                 break;
 
             case USE:
                 confirmItemUse(command);
+                loseEnergy(4);
                 break;
 
             case GO:
                 goRoom(command);
+                loseEnergy(5);
                 break;
 
             case INVENTORY:
                 inventory();
+                loseEnergy(1);
                 break;
 
             case QUIT:
@@ -235,7 +241,7 @@ public class Game {
         } else if (item.getName().equals("acid") && currentRoom.getName().equals("living room")) {
             unlockKitchenDoor(item);
         } else if (roomItem == null) {
-            System.out.println(item.getUnableUseDescription());
+            System.out.println(getUnableUseDescription(item));
         } else {
             player.removeItem(item);
             System.out.println(item.getUsingDescription());
@@ -244,6 +250,10 @@ public class Game {
             player.addItemToInventory(pickable);
         }
 
+    }
+
+    private String getUnableUseDescription(Item item) {
+        return "Can't use " + item.getName() + " in this room!";
     }
 
     private void unlockBasementDoor(Item item) {
@@ -286,6 +296,19 @@ public class Game {
             System.out.println("seems like we need to add more products in the mixer (needs one more item)");
             currentRoom.addItemInRoom(item);
             item.setIgnoreInRoom(true);
+        }
+    }
+
+    public void loseEnergy(int energyDepletion) {
+        if(energy > 150)
+        System.out.println("Used " + energyDepletion + " energy");
+        else System.out.println("Energy running low! Used " + energyDepletion + " energy");
+        energy -= energyDepletion;
+        if (energy > 0) {
+            System.out.println("Energy left: " + energy);
+        } else {
+            System.out.println("You lost all energy and fainted!");
+            wantToQuit = true;
         }
     }
 }
