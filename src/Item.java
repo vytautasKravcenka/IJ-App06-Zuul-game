@@ -1,19 +1,16 @@
 /**
- * add description here
+ * TODO: add description here
  */
 public class Item {
     private final String name;
-    private String usableName;
+    private String canBeUsedOn;
 
     private String usingDescription;
     private String unableUseDescription;
 
     private String cantTakeDescription;
 
-    private String canBeUsedOn;
-
     private boolean takeByHand;
-    private boolean isUsable;
     private boolean ignoreInRoom;
 
     public Item (String name)
@@ -58,14 +55,6 @@ public class Item {
         this.takeByHand = takeByHand;
     }
 
-    public boolean getUsable() {
-        return isUsable;
-    }
-
-    public void setUsable(Boolean usable) {
-        isUsable = usable;
-    }
-
     public String getCanBeUsedOn() {
         return canBeUsedOn;
     }
@@ -80,13 +69,5 @@ public class Item {
 
     public void setIgnoreInRoom(Boolean ignoreInRoom) {
         this.ignoreInRoom = ignoreInRoom;
-    }
-
-    public String getUsableName() {
-        return usableName;
-    }
-
-    public void setUsableName(String usableName) {
-        this.usableName = usableName;
     }
 }

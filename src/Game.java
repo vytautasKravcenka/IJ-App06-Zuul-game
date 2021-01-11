@@ -269,7 +269,7 @@ public class Game {
         System.out.println("You put the cup in the old sink");
         Item pickable = currentRoom.findItem("H2O_cup");
         currentRoom.takeItemFromRoom(pickable);
-        System.out.println("Cup was filled with water and put back in your inventory!");
+        System.out.println("Cup was filled with water!");
         player.addItemToInventory(pickable);
     }
 
@@ -280,7 +280,7 @@ public class Game {
 
         if (currentRoom.findItem("leaf") != null || currentRoom.findItem("H2O_cup") != null) {
             System.out.println("beep bloop blab mixer worked fine!");
-            System.out.println("You made Acid and put it into your inventory");
+            System.out.println("You made acid!");
             player.addItemToInventory(currentRoom.findItem("acid"));
         } else {
             System.out.println("seems like we need to add more products in the mixer (needs one more item)");

@@ -129,7 +129,7 @@ public class Room
             itemsList.append(item.getName()).append(" ");
             else
             {
-                itemsList.append(item.getUsableName()).append(" ");
+                itemsList.append(item.getName()).append(" ");
             }
         }
 
