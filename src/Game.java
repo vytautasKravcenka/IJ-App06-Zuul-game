@@ -267,7 +267,7 @@ public class Game {
     private void useSink(Item item) {
         player.removeItem(item);
         System.out.println("You put the cup in the old sink");
-        Item pickable = currentRoom.findItem("H20_cup");
+        Item pickable = currentRoom.findItem("H2O_cup");
         currentRoom.takeItemFromRoom(pickable);
         System.out.println("Cup was filled with water and put back in your inventory!");
         player.addItemToInventory(pickable);
