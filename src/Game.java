@@ -192,7 +192,7 @@ public class Game {
      */
     private void printHelp() {
         System.out.println("You wake up in a bed. You are alone. You remember a deep voice");
-        System.out.println("telling you, that you have 200 minutes left to leave the house or you die.");
+        System.out.println("telling you, that you have 300 minutes left to leave the house or you die.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
