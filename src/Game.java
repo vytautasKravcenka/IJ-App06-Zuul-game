@@ -15,6 +15,9 @@
  * @version 2016.02.29
  * <p>
  * Modified and extended by Derek and Andrei
+ *
+ * version 2020.01.10
+ * Modified by Vytautas Kravcenka
  */
 
 public class Game {
@@ -24,7 +27,7 @@ public class Game {
 
     public boolean wantToQuit = false;
 
-    private int energy = 200;
+    private int energy = 300;
 
     /**
      * Create the game and initialise its internal map.
@@ -113,11 +116,19 @@ public class Game {
                 loseEnergy(1);
                 break;
 
+            case SCORE:
+                printScore();
+                break;
+
             case QUIT:
                 wantToQuit = quit(command);
                 break;
         }
         return wantToQuit;
+    }
+
+    private void printScore() {
+        System.out.println("Your current score is: " + player.countScore());
     }
 
     private void inventory() {
@@ -180,8 +191,8 @@ public class Game {
      * command words.
      */
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("You wake up in a bed. You are alone. You remember a deep voice");
+        System.out.println("telling you, that you have 200 minutes left to leave the house or you die.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
@@ -208,6 +219,7 @@ public class Game {
         } else if (nextRoom.getLocked()) {
             System.out.println(nextRoom.getDoorErrorMessage());
         } else {
+            player.addTimesWalked();
             currentRoom = nextRoom;
             System.out.println(currentRoom.getShortDescription());
         }
@@ -242,6 +254,7 @@ public class Game {
             unlockKitchenDoor(item);
         } else if (roomItem == null) {
             System.out.println(getUnableUseDescription(item));
+            return;
         } else {
             player.removeItem(item);
             System.out.println(item.getUsingDescription());
@@ -249,6 +262,7 @@ public class Game {
             currentRoom.takeItemFromRoom(pickable);
             player.addItemToInventory(pickable);
         }
+        player.addPlayerStage();
 
     }
 
@@ -265,6 +279,7 @@ public class Game {
     private void unlockMainDoor(Item item) {
         player.removeItem(item);
         System.out.println("Congratulations you have beaten the game!");
+        System.out.println("Final score: " + player.countScore());
         wantToQuit = true;
     }
 

@@ -14,6 +14,9 @@ import java.util.HashMap;
  * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
+ *
+ * @version 2020.01.10
+ * @Modified by Vytautas Kravcenka
  */
 
 public class Room 
@@ -125,7 +128,7 @@ public class Room
         StringBuilder itemsList = new StringBuilder("Items in this room: ");
         for(Item item : items)
         {
-            if(!item.getIgnoreInRoom()) // TODO: check if this is okay to write !boolean method instead of "== false"
+            if(!item.getIgnoreInRoom())
             itemsList.append(item.getName()).append(" ");
         }
 

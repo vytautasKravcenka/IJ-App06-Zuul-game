@@ -1,5 +1,7 @@
 /**
- * TODO: add description here
+ *  Item class is for information about item setting and getting.
+ *  version 2020.01.10
+ *  Modified by Vytautas Kravcenka
  */
 public class Item {
     private final String name;

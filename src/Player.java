@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 
 /**
- *
+ *  player has a score and inventory to hold items
+ *  version 2020.01.10
+ *  Created by Vytautas Kravcenka
  */
 public class Player {
     private static final ArrayList<Item> inventory = new ArrayList<>();
+    private int playerStage = 0;
+    private int timesWalked = 0;
 
     public static Item findItem(String itemName) {
         for(Item item : inventory)
@@ -33,5 +37,18 @@ public class Player {
 
     public void removeItem(Item item) {
         inventory.remove(item);
+    }
+
+    public int countScore()
+    {
+        return ((playerStage * 100) - (timesWalked * 15));
+    }
+
+    public void addPlayerStage() {
+        playerStage ++;
+    }
+
+    public void addTimesWalked() {
+        timesWalked ++;
     }
 }
